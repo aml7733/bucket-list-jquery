@@ -1,0 +1,33 @@
+<%= form_for(bucket) do |f| %>
+  <% if bucket.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(bucket.errors.count, "error") %> prohibited this bucket from being saved:</h2>
+
+      <ul>
+      <% bucket.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.label :description %>
+  <%= f.text_area :description %><br>
+
+  Add or Delete Current Items: <%= f.collection_check_boxes :item_ids, Item.all, :id, :name  %> <br>
+  <h4>Or create new items by name:</h4>
+  <%= f.fields_for :items, bucket.items.build do |items_fields| %>
+    <label>Item Name</label>
+    <%= items_fields.text_field :name %><br>
+    <label>Item Description</label>
+    <%= items_fields.text_area :description %><br>
+    <label>Item Price</label>
+    <%= items_fields.text_field :price %><br>
+    <label>Item Days Needed</label>
+    <%= items_fields.text_field :days_cost %>
+  <% end %><br>
+  <%= f.submit %>
+<% end %>

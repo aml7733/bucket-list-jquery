@@ -1,0 +1,18 @@
+<h1>Bucket Page</h1>
+
+<h3><%= @bucket.name %></h3>
+<ul>
+<% unless @bucket.items.empty? %>
+  <% @bucket.items.each do |item| %>
+    <li><%= link_to "#{item.name}", item_path(item) %>  |  <%= link_to"Edit Item / Remove from Bucket", edit_item_path(item) %>  |   <% link_to "Delete Item", item_path(item), method: :delete %>
+  <% end %>
+<% end %>
+</ul>
+<h5>Description:</h5>
+<p><%= @bucket.description %></p><br>
+<h5>Total Cost:</h5>
+<p><%= @bucket.total_cost %></p>
+
+<%= link_to "Edit This Bucket", edit_bucket_path(@bucket) %><br>
+<%= link_to "Delete This Bucket", bucket_path(@bucket), method: :delete %><br>
+<%= link_to "Your Bucket Index", user_buckets_path(current_user) %>

@@ -1,0 +1,16 @@
+<h1>Item Page</h1>
+<h3>Name: <%= @item.name %></h3>
+<p><%= @item.description %></p>
+<h3>Cost:</h3>
+<p>$<%= @item.price %> and <%= @item.days_cost %> days</p>
+
+<h5>Item's Buckets:</h5>
+<ul>
+  <% if !@item.buckets.empty? %>
+    <% @item.buckets.each do |bucket| %>
+      <li><%= bucket.name %>  |  <%= bucket.user.email %>  |  <%= link_to "Edit Bucket", user_bucket_path(current_user, bucket) if bucket.user.id == current_user.id %></li>
+    <% end %>
+  <% end %>
+</ul>
+<%= link_to "Edit Item", edit_item_path(@item) %>
+<%= link_to "Delete Item", item_path(@item), method: :delete %>
