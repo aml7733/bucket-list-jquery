@@ -13,6 +13,11 @@ class BucketsController < ApplicationController
       redirect_to new_user_bucket_path(current_user), alert: "No buckets found.  Please create one."
     end
     @buckets = current_user.buckets
+    binding.pry
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @buckets }
+    end
   end
 
   def new

@@ -29,20 +29,22 @@ function attachListeners() {
 
   $("button#buckets").on("click", function(event) {
     debugger
-    var userId = event.target.data("id")
-    $.get(`/user/${userId}/buckets`, renderBuckets(data))
+    var userId = event.target.dataset["id"]
+    $.getJSON(`${userId}/buckets.json`, function(data) {
+      debugger
+    })
   });
 
   $('form').submit(function(event) {
     event.preventDefault();
     var values = $(this).serialize();
-
+    var posting = $.post()
   });
 
 }
 
 function renderBuckets(buckets) {
-
+  debugger
 }
 
 $(document).ready(attachListeners)
