@@ -15,3 +15,12 @@ class Bucket {
     return `$${moneyCost} and ${timeCost} days needed to kick this bucket.`
   }
 }
+
+class Item {
+  constructor(name, description = false, price = 0, days_cost = 0) {
+    this.name = name;
+    this.description = description;
+    this.price = price;
+    this.days_cost = days_cost;
+  }
+}
