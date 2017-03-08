@@ -25,8 +25,12 @@ class Item {
   }
 }
 
-function main() {
+function attachListeners() {
+
+  $("#buckets").on("click", getBuckets);
+
+  $("#newBucket").on("click", createBucket);
 
 }
 
-$(document).ready(main)
+$(document).ready(attachListeners)
