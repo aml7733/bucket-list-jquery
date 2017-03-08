@@ -2,9 +2,6 @@
 <br>
 <%= link_to "Create New Item", new_item_path %><br>
 <%= link_to "Create New Bucket", new_user_bucket_path(current_user) %><br>
-<button type="button" id="buckets">Get My Buckets</button><br>
+<button type="button" id="buckets" data-id="<%= current_user.id %>">Get My Buckets</button><br>
 
 <div id="newBucket"></div>
-
-
-<%= javascript_include_tag "application" %>

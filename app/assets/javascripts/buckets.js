@@ -5,7 +5,7 @@ class Bucket {
     this.items = items;
   }
 
-  total_cost {
+  total_cost() {
     var moneyCost = 0;
     var timeCost = 0;
     this.items.forEach((item) => {
@@ -27,9 +27,21 @@ class Item {
 
 function attachListeners() {
 
-  $("#buckets").on("click", getBuckets);
+  $("button#buckets").on("click", function(event) {
+    debugger
+    var userId = event.target.data("id")
+    $.get(`/user/${userId}/buckets`, renderBuckets(data))
+  });
 
-  $("#newBucket").on("click", createBucket);
+  $('form').submit(function(event) {
+    event.preventDefault();
+    var values = $(this).serialize();
+
+  });
+
+}
+
+function renderBuckets(buckets) {
 
 }
 

@@ -2,7 +2,9 @@ Specifications for the Rails with jQuery Assessment
 
 Specs:
 
-[] Use jQuery for implementing new requirements
+[x] Use jQuery for implementing new requirements
+
+
 [] Include a show resource rendered using jQuery and an Active Model Serialization JSON backend. <!-- bucket show page has rendered json => js model and next button functionality -->
 [] Include an index resource rendered using jQuery and an Active Model Serialization JSON backend.  <!-- user show page has bucket index button, renders json => js model for each -->
 [] Include at least one has_many relationship in information rendered via JSON and appended to the DOM.  <!-- buckets have many items on index page render -->
