@@ -24,3 +24,9 @@ class Item {
     this.days_cost = days_cost;
   }
 }
+
+function main() {
+
+}
+
+$(document).ready(main)
