@@ -28,11 +28,10 @@ class Item {
 function attachListeners() {
 
   $("button#buckets").on("click", function(event) {
-    debugger
     var userId = event.target.dataset["id"]
     $.getJSON(`${userId}/buckets.json`, function(data) {
-      debugger
-    })
+      renderBuckets(data);
+    });
   });
 
   $('form').submit(function(event) {
@@ -43,8 +42,30 @@ function attachListeners() {
 
 }
 
-function renderBuckets(buckets) {
+function renderBuckets(response) {
   debugger
+
+  response.buckets.forEach((jsonBucket) => {
+    var items = [];
+    jsonBucket.items.forEach((item) => {
+      var itm = new Item(item.name, item.description, item.price, item.days_cost)
+      items.push(itm);
+    });
+    var bucket = new Bucket(jsonBucket.name, jsonBucket.description, items)
+    debugger
+    $("#bucketList").append(makeHtmlString(bucket));
+  });
+}
+
+function makeHtmlString(bucket) {
+  var bucketInfo = `<h3>${bucket.name}</h3><p>${bucket.description}</p>`
+  var itemsInfo = "<ul>"
+  bucket.items.forEach((item) => {
+    itemsInfo += `<li>${item.name}: $${item.price}, ${item.days_cost} days</li>`
+  });
+  itemsInfo += "</ul><br>";
+
+  return bucketInfo + itemsInfo;
 }
 
 $(document).ready(attachListeners)
