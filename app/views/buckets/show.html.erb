@@ -1,7 +1,7 @@
 <h1>Bucket Page</h1>
 
-<h3><%= @bucket.name %></h3>
-<ul>
+<h3 id="bucketName"><%= @bucket.name %></h3>
+<ul id="bucketItems">
 <% unless @bucket.items.empty? %>
   <% @bucket.items.each do |item| %>
     <li><%= link_to "#{item.name}", item_path(item) %>  |  <%= link_to"Edit Item / Remove from Bucket", edit_item_path(item) %>  |   <% link_to "Delete Item", item_path(item), method: :delete %>
@@ -9,12 +9,13 @@
 <% end %>
 </ul>
 <h5>Description:</h5>
-<p><%= @bucket.description %></p><br>
+<p id="bucketDescription"><%= @bucket.description %></p><br>
 <h5>Total Cost:</h5>
-<p><%= @bucket.total_cost %></p>
+<p id="bucketTotalCost"><%= @bucket.total_cost %></p>
 
-<a href="#" class="js-next" data-bucketId="<%=@bucket.id%>" data-userId="<%= current_user.id %>">Next Bucket</a><br>
+<a href="#" class="js-next" data-currentUserBucketIds="<%= current_user_bucket_ids %>" data-currentIndex="<%=current_user_bucket_ids.index(@bucket.id)%>">Next Bucket</a><br>
 
-<%= link_to "Edit This Bucket", edit_bucket_path(@bucket) %><br>
+
+<!-- <%= link_to "Edit This Bucket", edit_bucket_path(@bucket) %><br>
 <%= link_to "Delete This Bucket", bucket_path(@bucket), method: :delete %><br>
-<%= link_to "Your Bucket Index", user_buckets_path(current_user) %>
+<%= link_to "Your Bucket Index", user_buckets_path(current_user) %> -->

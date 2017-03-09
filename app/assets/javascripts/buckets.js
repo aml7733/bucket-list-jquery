@@ -36,12 +36,26 @@ function attachListeners() {
     });
   });
 
-  $(".js-next").on("click", function() {
+  $(".js-next").on("click", function(e) {
+    e.preventDefault();
     debugger
-    var nextItemId = parseInt($(".js-next").attr("data-itemId")) + 1;
-    var userId = $(".js-next").attr("data-userId")
-    $.getJSON(`items/${nextItemId}.json`, function(data) {
-      renderBucket(data)
+    var currentIndex = parseInt($(".js-next").data("currentindex"));
+    var nextIndex;
+    var userBucketIds = $(".js-next").data("currentuserbucketids");
+    if (currentIndex >= userBucketIds.length - 1) {
+      alert("That was the last bucket. Click 'My Buckets' to see the index view. Here's the first one again:");
+      $(".js-next").data("currentindex", 0);
+      nextIndex = 0;
+    } else {
+      nextIndex = currentIndex + 1
+    }
+    $(".js-next").data("currentindex", nextIndex);
+    var nextBucketId = userBucketIds[nextIndex];
+    debugger
+    var url = nextBucketId + ".json"
+    $.get(url, function(data) {
+      var bucket = renderBucket(data.bucket);
+      showBucket(bucket);
     })
   });
 
@@ -68,6 +82,20 @@ function renderBucket(bucket) {
   });
   var newBucket = new Bucket(bucket.name, bucket.description, items)
   return newBucket;
+}
+
+function showBucket(bucket) {
+  $("#bucketName").text(bucket.name);
+  $("#bucketDescription").text(bucket.description);
+  $("#bucketTotalCost").text(bucket.total_cost());
+  $("#bucketItems").text("");
+  bucket.items.forEach((item) => {
+    var string = `<li>${item.name} - $${item.price} and ${item.days_cost} days</li>`
+    $("#bucketItems").append(string)
+  });
+  //
+  // var currentIndex = parseInt($(".js-next").data("currentindex")) + 1;
+  // $(".js-next").data("currentindex", currentIndex);
 }
 
 function makeHtmlString(bucket) {

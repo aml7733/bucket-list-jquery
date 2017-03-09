@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   get 'users/:id/buckets.json', to: 'buckets#index'
+  get 'users/:user_id/buckets/:id.json', to: 'buckets#show'
 
   root to: "buckets#home"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
