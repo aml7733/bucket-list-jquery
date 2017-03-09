@@ -5,3 +5,17 @@
     <li><%= link_to "#{item.name}", item_path(item) %></li>
   <% end %>
 </ul>
+
+<h3>Create Stand-alone Item:</h3>
+<p>Item will be added to this index and the checkbox list on the Bucket Create page.</p>
+
+
+
+
+<script type="text/javascript">
+  $(function () {
+    $('form').submit(function(event) {
+      event.preventDefault();
+    })
+  });
+</script>
