@@ -9,10 +9,12 @@ class Bucket {
     var moneyCost = 0;
     var timeCost = 0;
     this.items.forEach((item) => {
-      moneyCost += item.price;
-      timeCost += item.days_cost;
+      var pr = parseFloat(item.price);
+      var dc = parseInt(item.days_cost);
+      moneyCost += pr;
+      timeCost += dc;
     });
-    return `$${moneyCost} and ${timeCost} days needed to kick this bucket.`
+    return `$${moneyCost.toFixed(2)} and ${timeCost} days needed to kick this bucket.`
   }
 }
 
@@ -43,8 +45,6 @@ function attachListeners() {
 }
 
 function renderBuckets(response) {
-  debugger
-
   response.buckets.forEach((jsonBucket) => {
     var items = [];
     jsonBucket.items.forEach((item) => {
@@ -52,7 +52,7 @@ function renderBuckets(response) {
       items.push(itm);
     });
     var bucket = new Bucket(jsonBucket.name, jsonBucket.description, items)
-    debugger
+
     $("#bucketList").append(makeHtmlString(bucket));
   });
 }
@@ -64,8 +64,11 @@ function makeHtmlString(bucket) {
     itemsInfo += `<li>${item.name}: $${item.price}, ${item.days_cost} days</li>`
   });
   itemsInfo += "</ul><br>";
+  var kickString = "<p>" + bucket.total_cost() + "</p>";
 
-  return bucketInfo + itemsInfo;
+  return bucketInfo + itemsInfo + kickString;
 }
+
+
 
 $(document).ready(attachListeners)
