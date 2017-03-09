@@ -13,6 +13,8 @@
 <h5>Total Cost:</h5>
 <p><%= @bucket.total_cost %></p>
 
+<a href="#" class="js-next" data-bucketId="<%=@bucket.id%>" data-userId="<%= current_user.id %>">Next Bucket</a><br>
+
 <%= link_to "Edit This Bucket", edit_bucket_path(@bucket) %><br>
 <%= link_to "Delete This Bucket", bucket_path(@bucket), method: :delete %><br>
 <%= link_to "Your Bucket Index", user_buckets_path(current_user) %>

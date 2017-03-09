@@ -1,10 +1,8 @@
 <h1><%= current_user.email %>'s Bucket List</h1>
-
+<%= link_to "Single Bucket Detail View", user_bucket_path(current_user, current_user_bucket_ids[0]) %>
 <ul>
   <% @buckets.each do |bucket| %>
   <li><strong><%= bucket.name %></strong> <%= bucket.items.count %> item(s)  :  <%= bucket.total_cost %>  |  <%= link_to "Edit", edit_bucket_path(bucket) %>  |  <%= link_to "Delete", bucket_path(bucket), method: :delete %></li>
   <% end %>
 </ul>
 <%= link_to "Create New Bucket", new_user_bucket_path(current_user) %>
-
-<%= javascript_include_tag("application") %>

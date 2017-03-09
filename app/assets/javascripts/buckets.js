@@ -36,25 +36,38 @@ function attachListeners() {
     });
   });
 
-  $('form').submit(function(event) {
-    event.preventDefault();
-    var values = $(this).serialize();
-    var posting = $.post()
+  $(".js-next").on("click", function() {
+    debugger
+    var nextItemId = parseInt($(".js-next").attr("data-itemId")) + 1;
+    var userId = $(".js-next").attr("data-userId")
+    $.getJSON(`items/${nextItemId}.json`, function(data) {
+      renderBucket(data)
+    })
   });
+
+  // $('form').submit(function(event) {
+  //   event.preventDefault();
+  //   var values = $(this).serialize();
+  //   var posting = $.post()
+  // });
 
 }
 
 function renderBuckets(response) {
   response.buckets.forEach((jsonBucket) => {
-    var items = [];
-    jsonBucket.items.forEach((item) => {
-      var itm = new Item(item.name, item.description, item.price, item.days_cost)
-      items.push(itm);
-    });
-    var bucket = new Bucket(jsonBucket.name, jsonBucket.description, items)
-
+    var bucket = renderBucket(jsonBucket);
     $("#bucketList").append(makeHtmlString(bucket));
   });
+}
+
+function renderBucket(bucket) {
+  var items = [];
+  bucket.items.forEach((item) => {
+    var itm = new Item(item.name, item.description, item.price, item.days_cost)
+    items.push(itm);
+  });
+  var newBucket = new Bucket(bucket.name, bucket.description, items)
+  return newBucket;
 }
 
 function makeHtmlString(bucket) {

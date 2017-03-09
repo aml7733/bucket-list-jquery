@@ -5,7 +5,7 @@ Specs:
 [x] Use jQuery for implementing new requirements
 
 
-[] Include a show resource rendered using jQuery and an Active Model Serialization JSON backend. <!-- bucket show page has rendered json => js model and next button functionality -->
+[] Include a show resource rendered using jQuery and an Active Model Serialization JSON backend. <!-- item show page has rendered json => js model and next button functionality -->
 [x] Include an index resource rendered using jQuery and an Active Model Serialization JSON backend.  <!-- user show page has bucket index button, renders json => js model for each -->
 [x] Include at least one has_many relationship in information rendered via JSON and appended to the DOM.  <!-- buckets have many items on index page render -->
 [] Include at least one link that loads or updates a resource without reloading the page.  <!-- bucket show page has create item form, submitted with jquery post -->
