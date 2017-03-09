@@ -7,8 +7,18 @@
 </ul>
 
 <h3>Create Stand-alone Item:</h3>
-<p>Item will be added to this index and the checkbox list on the Bucket Create page.</p>
-
+<p>Item will be added to this index and the checkbox list on the Bucket Create page.</p><br>
+  <%= form_tag '/items' do %>
+    <%= label_tag :name %><br>
+    <%= text_field_tag :name %><br>
+    <%= label_tag :description %><br>
+    <%= text_area_tag :description %><br>
+    <%= label_tag :price %><br>
+    <%= text_field_tag :price %><br>
+    <%= label_tag :days_cost %><br>
+    <%= text_field_tag :days_cost %><br>
+    <%= submit_tag "Create New Item" %>
+  <% end %>
 
 
 
@@ -16,6 +26,7 @@
   $(function () {
     $('form').submit(function(event) {
       event.preventDefault();
+      debugger
     })
   });
 </script>
