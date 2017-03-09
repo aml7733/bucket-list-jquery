@@ -18,6 +18,11 @@ class ItemsController < ApplicationController
     else
       render :new
     end
+
+    respond_do do |format|
+      format.html { render :show }
+      format.json { render json: @item, status: 201 }
+    end
   end
 
   def show

@@ -1,3 +1,14 @@
 <h1>New Item</h1>
 
 <%= render partial: "form", locals: { item: @item } %>
+
+
+<script type="text/javascript">
+  $(function () {
+    $('form').submit(function(event) {
+      event.preventDefault();
+      var values = $(this).serialize();
+      debugger
+    })
+  });
+</script>
