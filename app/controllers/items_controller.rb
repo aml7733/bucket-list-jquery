@@ -14,14 +14,9 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to item_path(@item), message: "Successfully created item."
+      render json: @item, status: 201
     else
       render :new
-    end
-
-    respond_do do |format|
-      format.html { render :show }
-      format.json { render json: @item, status: 201 }
     end
   end
 

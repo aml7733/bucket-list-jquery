@@ -2,13 +2,27 @@
 
 <%= render partial: "form", locals: { item: @item } %>
 
+<div id="itemResult">
+  <h2 id="heading"></h2>
+  <h3 id="itemName"></h3>
+  <p id="itemDesc"></p>
+  <span id="itemCost"></span>
+</div>
+
 
 <script type="text/javascript">
   $(function () {
     $('form').submit(function(event) {
       event.preventDefault();
       var values = $(this).serialize();
-      debugger
+      var posting = $.post('/items', values);
+      posting.done(function(data) {
+        var item = data.item;
+        $("#heading").text("Your New Item:");
+        $("#itemName").text(item.name);
+        $("#itemDesc").text(item.description);
+        $("#itemCost").text(`Cost : $${item.price} and ${item.days_cost} days`);
+      })
     })
   });
 </script>
